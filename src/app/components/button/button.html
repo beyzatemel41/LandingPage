@@ -1,0 +1,16 @@
+<button
+  class="btn"
+  [class.btn--primary]="variant === 'primary'"
+  [class.btn--ghost]="variant === 'ghost'"
+  [class.btn--outline]="variant === 'outline'"
+  [class.btn--sm]="size === 'sm'"
+  [class.btn--lg]="size === 'lg'"
+  [attr.aria-label]="ariaLabel || null"
+  [attr.aria-disabled]="disabled ? 'true' : null"
+  [disabled]="disabled || loading"
+  [attr.type]="type"
+  (click)="onClick($event)"
+>
+  <span class="btn__spinner" *ngIf="loading" aria-hidden="true"></span>
+  <ng-content></ng-content>
+</button>
