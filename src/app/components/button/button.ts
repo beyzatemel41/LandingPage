@@ -3,6 +3,7 @@ import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-button',
+  standalone: true,
   imports: [NgIf],
   templateUrl: './button.html',
   styleUrl: './button.scss'

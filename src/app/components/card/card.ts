@@ -1,11 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { NgIf, NgFor } from '@angular/common';
+import { Button } from '../button/button';
 
 @Component({
   selector: 'app-card',
-  imports: [],
+  standalone: true,
+  imports: [NgIf, NgFor, Button],
   templateUrl: './card.html',
   styleUrl: './card.scss'
 })
 export class Card {
-
+  @Input() title = '';
+  @Input() price?: string;
+  @Input() features: string[] = [];
+  @Input() ctaLabel?: string;
+  @Input() highlight = false;
 }

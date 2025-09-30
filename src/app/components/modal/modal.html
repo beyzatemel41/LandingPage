@@ -1,1 +1,11 @@
-<p>modal works!</p>
+<div *ngIf="open" class="modal-surface" (click)="onBackdropClick($event)">
+  <div #dialog class="modal-card" role="dialog" [attr.aria-label]="title" aria-modal="true">
+    <header style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.06)">
+      <h3 style="margin:0">{{ title }}</h3>
+      <button class="btn btn--ghost" type="button" (click)="close()" aria-label="Kapat">✕</button>
+    </header>
+    <div style="padding:20px">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

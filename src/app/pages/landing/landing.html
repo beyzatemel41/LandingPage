@@ -1,40 +1,78 @@
-<header class="header">
+<header class="header" role="banner">
   <div class="container">
     <h1 class="logo">LOGO</h1>
-    <nav class="nav">
-      <a href="#">Anasayfa</a>
-      <a href="#">Ürünler</a>
-      <a href="#">İletişim</a>
+    <nav class="nav" aria-label="Ana menü">
+      <app-button variant="ghost" size="sm" (pressed)="scrollTo('hero')">Anasayfa</app-button>
+      <app-button variant="ghost" size="sm" (pressed)="scrollTo('features')">Özellikler</app-button>
+      <app-button variant="ghost" size="sm" (pressed)="scrollTo('pricing')">Fiyatlar</app-button>
+      <app-button variant="ghost" size="sm" (pressed)="scrollTo('faq')">SSS</app-button>
+      <app-button variant="ghost" size="sm" (pressed)="scrollTo('contact')">İletişim</app-button>
+      <app-button variant="ghost" size="sm" (pressed)="toggleTheme()" ariaLabel="Tema değiştir">Tema</app-button>
     </nav>
   </div>
 </header>
 
-<section class="hero">
+<aside class="sidebar" aria-label="Yan menü">
+  <div class="sidebar__inner">
+    <app-button variant="ghost" size="sm" (pressed)="scrollTo('features')">Özellikler</app-button>
+    <app-button variant="ghost" size="sm" (pressed)="scrollTo('pricing')">Fiyatlar</app-button>
+    <app-button variant="ghost" size="sm" (pressed)="scrollTo('faq')">SSS</app-button>
+    <app-button variant="ghost" size="sm" (pressed)="scrollTo('contact')">İletişim</app-button>
+  </div>
+  <button class="sidebar__toggle btn btn--ghost" type="button" aria-label="Yan menüyü aç/kapat" (click)="sidebarOpen = !sidebarOpen">☰</button>
+</aside>
+
+<section id="hero" class="hero" role="region" aria-label="Hero">
   <div class="container">
     <h2>En iyi ürünümüzü keşfedin</h2>
     <p>Kısa bir açıklama metni buraya gelecek.</p>
-    <button class="btn btn--primary">Hemen İncele</button>
-  </div>
-</section>
-
-<section class="products">
-  <div class="container">
-    <h3>Ürünlerimiz</h3>
-    <div class="grid">
-      <div class="card-placeholder">Ürün 1</div>
-      <div class="card-placeholder">Ürün 2</div>
-      <div class="card-placeholder">Ürün 3</div>
+    <app-button variant="primary" size="lg" (pressed)="openModal=true">Hemen İncele</app-button>
+    <div class="hero__cta-row">
+      <app-button variant="outline" size="md" (pressed)="scrollTo('features')">Özelliklere Git</app-button>
+      <app-button variant="ghost" size="md" (pressed)="scrollTo('pricing')">Fiyatları Gör</app-button>
     </div>
   </div>
 </section>
 
-<section class="cta-form">
+<section id="features" class="products" role="region" aria-label="Özellikler">
+  <div class="container">
+    <h3>Özellikler</h3>
+    <div class="grid">
+      <app-card title="Hızlı Kurulum" [features]="['1 dk kurulum', 'Otomatik güncelleme']"></app-card>
+      <app-card title="Güvenli" [features]="['2FA', 'Şifreleme']"></app-card>
+      <app-card title="Ölçeklenebilir" [features]="['Bulut yerel', 'CDN']"></app-card>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="pricing" role="region" aria-label="Fiyatlar">
+  <div class="container">
+    <h3>Fiyatlar</h3>
+    <div class="grid">
+      <app-card title="Başlangıç" price="₺0" [features]="['Temel özellikler']" ctaLabel="Başla"></app-card>
+      <app-card title="Pro" price="₺199/ay" [features]="['Tüm özellikler','Öncelikli destek']" ctaLabel="Satın Al" [highlight]="true"></app-card>
+      <app-card title="Kurumsal" price="İletişime geçin" [features]="['Özel SLA','SSO']" ctaLabel="Görüşelim"></app-card>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="faq" role="region" aria-label="SSS">
+  <div class="container">
+    <h3>SSS</h3>
+    <app-accordion [items]="faqItems"></app-accordion>
+  </div>
+</section>
+
+<section id="contact" class="cta-form" role="region" aria-label="İletişim formu">
   <div class="container">
     <h3>Bize Ulaşın</h3>
-    <form>
-      <input type="text" placeholder="Adınız" required />
-      <input type="email" placeholder="E-posta" required />
-      <button type="submit" class="btn btn--primary">Gönder</button>
+    <form (submit)="onSubmit($event)" novalidate>
+      <app-input id="name" name="name" label="Ad Soyad" placeholder="Adınız" [required]="true" [(ngModel)]="form.name"></app-input>
+      <app-input id="email" name="email" type="email" label="E-posta" placeholder="ornek@mail.com" [required]="true" [invalid]="emailInvalid" [(ngModel)]="form.email" ariaDescribedBy="emailHelp"></app-input>
+      <small id="emailHelp" class="input__hint" *ngIf="emailInvalid">Lütfen geçerli bir e‑posta girin.</small>
+      <div style="margin-top:12px">
+        <app-button variant="primary" type="submit">Gönder</app-button>
+      </div>
     </form>
   </div>
 </section>
@@ -44,3 +82,11 @@
     <p>© 2025 Tüm Hakları Saklıdır</p>
   </div>
 </footer>
+
+<app-modal [open]="openModal" title="Hızlı Başlangıç" (closed)="openModal=false">
+  <p>Kurulum adımlarını izlemek için e‑posta bırakın veya dökümana göz atın.</p>
+  <div style="display:flex;gap:12px;margin-top:12px">
+    <app-button variant="primary" (pressed)="openModal=false">Tamam</app-button>
+    <app-button variant="ghost" (pressed)="openModal=false">Kapat</app-button>
+  </div>
+</app-modal>

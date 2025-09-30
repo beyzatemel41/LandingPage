@@ -1,0 +1,21 @@
+
+.card {
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-10);
+  background: var(--color-elevated);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.card--highlight {
+  outline: 1px solid color-mix(in oklab, var(--color-primary) 60%, transparent);
+  box-shadow: 0 18px 60px rgba(124,92,255,.24);
+}
+
+.card__title { margin: 0; font-size: 20px; }
+.card__price { margin: 0; font-weight: 700; font-size: 28px; }
+.card__features { margin: 0; padding-left: 18px; display: grid; gap: 8px; }
+.card__footer { display: flex; }
+

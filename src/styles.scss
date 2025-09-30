@@ -70,6 +70,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Smooth scroll for anchor/button based navigation */
+html { scroll-behavior: smooth; }
+
 /* Layout utilities */
 .container {
   width: min(1120px, 92%);
