@@ -21,7 +21,7 @@ export class Landing {
     { id: 'q3', question: 'İptal edebilir miyim?', answer: 'Dilediğiniz zaman iptal edebilirsiniz.' },
   ];
 
-  form = { name: '', email: '' };
+  form = { name: '', email: '', search: '' };
   emailInvalid = false;
   openModal = false;
   isLightTheme = false;

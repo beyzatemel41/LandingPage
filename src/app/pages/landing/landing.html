@@ -5,7 +5,7 @@
 <h1 class="logo">
   <img src="/Logo.ico" alt="Logo">
 </h1>    
-    <nav class="btn" aria-label="Ana menü">
+    <nav class="nav" aria-label="Ana menü">
       <app-button variant="ghost" size="sm" (pressed)="scrollTo('hero')">Anasayfa</app-button>
       <app-button variant="ghost" size="sm" (pressed)="scrollTo('products')">Ürünler</app-button>
       <app-button variant="ghost" size="sm" (pressed)="scrollTo('bestsellers')">En Çok Satanlar</app-button>
@@ -37,7 +37,7 @@
   <div class="marquee-wrapper">
   <div class="marquee">
     <span>ŞİMDİ AL SONRA ÖDE</span>
-    <span>ŞİMDİ AL SONRA ÖDE</span>>
+    <span>ŞİMDİ AL SONRA ÖDE</span>
 
   </div>
 </div>
@@ -71,6 +71,7 @@
   
 </section>
 
+
 <section id="products" class="products" role="region" aria-label="Ürünler">
   <div class="container">
     <h3>Ürünler</h3>
@@ -87,11 +88,18 @@
   </div>
 </section>
 
-<section id="bestsellers" class="pricing" role="region" aria-label="En Çok Satanlar">
+<section id="categories" class="categories" role="region" aria-label="Kategoriler">
   <div class="container">
-    <h3>En Çok Satanlar</h3>
-    <div class="grid">
-      <app-card *ngFor="let b of bestSellers" [title]="b.name" [price]="b.price" ctaLabel="Satın Al" [highlight]="true"></app-card>
+    <h3>Kategoriler</h3>
+    <div class="category-grid">
+      <a class="category-card category-card--women" href="#" aria-label="Kadın Parfümleri">
+        <div class="category-card__overlay"></div>
+        <h4>Kadın Parfümleri</h4>
+      </a>
+      <a class="category-card category-card--men" href="#" aria-label="Erkek Parfümleri">
+        <div class="category-card__overlay"></div>
+        <h4>Erkek Parfümleri</h4>
+      </a>
     </div>
   </div>
 </section>
