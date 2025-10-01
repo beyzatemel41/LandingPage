@@ -12,10 +12,21 @@
   --color-accent: #22d3ee;
   --color-danger: #ef4444;
 
-  /* Borders & radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  /* Background accents */
+  --bg-petal-1: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  --bg-petal-2: color-mix(in oklab, var(--color-accent) 10%, transparent);
+  --bg-petal-3: color-mix(in oklab, #ff9ad6 8%, transparent); /* pastel pink */
+  /* Bluish-pink wash */
+  --bg-hue-a: rgba(139, 211, 255, 0.10);
+  --bg-hue-b: rgba(255, 173, 223, 0.10);
+
+  /* Floral pattern (dark default) - SVG data URI */
+  --bg-floral: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='%23ffb3d6' opacity='0.22'%3E%3Ccircle cx='60' cy='60' r='40'/%3E%3Cellipse cx='140' cy='120' rx='56' ry='36'/%3E%3Ccircle cx='320' cy='90' r='36'/%3E%3Cellipse cx='260' cy='200' rx='72' ry='48'/%3E%3Ccircle cx='90' cy='300' r='32'/%3E%3C/g%3E%3Cg fill='%238bd3ff' opacity='0.18'%3E%3Ccircle cx='220' cy='60' r='28'/%3E%3Cellipse cx='360' cy='220' rx='52' ry='34'/%3E%3Ccircle cx='200' cy='320' r='30'/%3E%3C/g%3E%3Cg fill='%23d7c1ff' opacity='0.16'%3E%3Ccircle cx='40' cy='200' r='22'/%3E%3Cellipse cx='320' cy='340' rx='46' ry='30'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* Borders & radius (extra-soft rounded) */
+  --radius-sm: 9999px; /* pills for small elements (buttons/inputs) */
+  --radius-md: 24px;
+  --radius-lg: 36px;
 
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0,0,0,.2);
@@ -53,6 +64,15 @@
   --color-accent: #0891b2;
   --shadow-md: 0 8px 30px rgba(2,6,23,.08);
   --shadow-lg: 0 30px 80px rgba(2,6,23,.12);
+
+  /* Brighter, softer petals for light theme */
+  --bg-petal-1: color-mix(in oklab, var(--color-primary) 12%, transparent);
+  --bg-petal-2: color-mix(in oklab, var(--color-accent) 12%, transparent);
+  --bg-petal-3: color-mix(in oklab, #ffaddf 12%, transparent);
+  --bg-hue-a: rgba(139, 211, 255, 0.18);
+  --bg-hue-b: rgba(255, 173, 223, 0.18);
+  /* Floral pattern (light variant) */
+  --bg-floral: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='%23ffc2e3' opacity='0.32'%3E%3Ccircle cx='60' cy='60' r='40'/%3E%3Cellipse cx='140' cy='120' rx='56' ry='36'/%3E%3Ccircle cx='320' cy='90' r='36'/%3E%3Cellipse cx='260' cy='200' rx='72' ry='48'/%3E%3Ccircle cx='90' cy='300' r='32'/%3E%3C/g%3E%3Cg fill='%23a7e4ff' opacity='0.24'%3E%3Ccircle cx='220' cy='60' r='28'/%3E%3Cellipse cx='360' cy='220' rx='52' ry='34'/%3E%3Ccircle cx='200' cy='320' r='30'/%3E%3C/g%3E%3Cg fill='%23e2d6ff' opacity='0.22'%3E%3Ccircle cx='40' cy='200' r='22'/%3E%3Cellipse cx='320' cy='340' rx='46' ry='30'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 html, body {
@@ -63,9 +83,16 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   color: var(--color-text);
-  background: radial-gradient(1200px 800px at 10% -10%, rgba(124,92,255,.20), transparent 60%),
-              radial-gradient(1400px 900px at 110% 10%, rgba(34,211,238,.12), transparent 60%),
-              var(--color-bg);
+  /* Full-page bluish-pink wash + floral pattern that gently fades with depth */
+  background-image:
+    linear-gradient(120deg, var(--bg-hue-a) 0%, var(--bg-hue-b) 100%),
+    var(--bg-floral),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-bg) 0%, transparent) 0%, color-mix(in oklab, var(--color-bg) 40%, transparent) 45%, color-mix(in oklab, var(--color-bg) 70%, transparent) 75%, var(--color-bg) 100%);
+  background-repeat: no-repeat, repeat, no-repeat;
+  background-size: 100% 100%, 520px 520px, 100% 100%;
+  background-position: top center, top center, top center;
+  background-blend-mode: normal, normal, normal;
+  background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

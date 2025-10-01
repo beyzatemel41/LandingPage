@@ -1,57 +1,82 @@
 <header class="header" role="banner">
-  <div class="container">
+  <div class="container header__grid">
     <h1 class="logo">LOGO</h1>
     <nav class="nav" aria-label="Ana menü">
       <app-button variant="ghost" size="sm" (pressed)="scrollTo('hero')">Anasayfa</app-button>
-      <app-button variant="ghost" size="sm" (pressed)="scrollTo('features')">Özellikler</app-button>
-      <app-button variant="ghost" size="sm" (pressed)="scrollTo('pricing')">Fiyatlar</app-button>
+      <app-button variant="ghost" size="sm" (pressed)="scrollTo('products')">Ürünler</app-button>
+      <app-button variant="ghost" size="sm" (pressed)="scrollTo('bestsellers')">En Çok Satanlar</app-button>
       <app-button variant="ghost" size="sm" (pressed)="scrollTo('faq')">SSS</app-button>
       <app-button variant="ghost" size="sm" (pressed)="scrollTo('contact')">İletişim</app-button>
-      <app-button variant="ghost" size="sm" (pressed)="toggleTheme()" ariaLabel="Tema değiştir">Tema</app-button>
     </nav>
+    <div class="header__right">
+      <button
+        class="theme-toggle"
+        type="button"
+        role="switch"
+        [attr.aria-checked]="isLightTheme ? 'true' : 'false'"
+        aria-label="Tema değiştir"
+        (click)="toggleTheme()"
+      >
+        <span class="theme-toggle__icon" aria-hidden="true">
+          @if (isLightTheme) { ☀️ } @else { 🌙 }
+        </span>
+      </button>
+    </div>
   </div>
+  
 </header>
-
-<aside class="sidebar" aria-label="Yan menü">
-  <div class="sidebar__inner">
-    <app-button variant="ghost" size="sm" (pressed)="scrollTo('features')">Özellikler</app-button>
-    <app-button variant="ghost" size="sm" (pressed)="scrollTo('pricing')">Fiyatlar</app-button>
-    <app-button variant="ghost" size="sm" (pressed)="scrollTo('faq')">SSS</app-button>
-    <app-button variant="ghost" size="sm" (pressed)="scrollTo('contact')">İletişim</app-button>
-  </div>
-  <button class="sidebar__toggle btn btn--ghost" type="button" aria-label="Yan menüyü aç/kapat" (click)="sidebarOpen = !sidebarOpen">☰</button>
-</aside>
 
 <section id="hero" class="hero" role="region" aria-label="Hero">
   <div class="container">
-    <h2>En iyi ürünümüzü keşfedin</h2>
-    <p>Kısa bir açıklama metni buraya gelecek.</p>
-    <app-button variant="primary" size="lg" (pressed)="openModal=true">Hemen İncele</app-button>
-    <div class="hero__cta-row">
-      <app-button variant="outline" size="md" (pressed)="scrollTo('features')">Özelliklere Git</app-button>
-      <app-button variant="ghost" size="md" (pressed)="scrollTo('pricing')">Fiyatları Gör</app-button>
+    <article class="hero-card" aria-labelledby="hero-title">
+      <div class="hero-card__media" aria-hidden="true">
+        <div class="hero-card__badge">Yeni</div>
+        <div class="hero-card__bottle"></div>
+      </div>
+      <div class="hero-card__content">
+        <h2 id="hero-title" class="hero-card__title">Niche Saffron Ambre</h2>
+        <p class="hero-card__subtitle">Sıradışı notalarla imza kokunuzu keşfedin. Safranın sıcaklığı, amberin zarafetiyle buluşuyor.</p>
+        <div class="hero-card__meta">
+          <span class="hero-card__price" aria-label="Başlangıç fiyatı">₺1.650</span>
+          <span class="hero-card__volume" aria-label="Şişe hacmi">70 ml</span>
+        </div>
+        <div class="hero-card__actions">
+          <app-button variant="primary" size="lg" (pressed)="openModal=true">Hemen İncele</app-button>
+          <app-button variant="outline" size="md" (pressed)="scrollTo('products')">Ürünlere Git</app-button>
+          <app-button variant="ghost" size="md" (pressed)="scrollTo('bestsellers')">En Çok Satanlar</app-button>
+        </div>
+        <ul class="hero-card__trust" aria-label="Güven göstergeleri">
+          <li>Orijinal Ürün</li>
+          <li>Hızlı Kargo</li>
+          <li>Kolay İade</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+  
+</section>
+
+<section id="products" class="products" role="region" aria-label="Ürünler">
+  <div class="container">
+    <h3>Ürünler</h3>
+    <div class="products-scroller" aria-label="Ürün listesi">
+      <article class="product-card" *ngFor="let p of products">
+        <div class="product-card__image" role="img" [attr.aria-label]="p.name"></div>
+        <div class="product-card__body">
+          <h4 class="product-card__title">{{ p.name }}</h4>
+          <p class="product-card__price">{{ p.price }}</p>
+          <app-button variant="primary" size="sm">Sepete Ekle</app-button>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section id="features" class="products" role="region" aria-label="Özellikler">
+<section id="bestsellers" class="pricing" role="region" aria-label="En Çok Satanlar">
   <div class="container">
-    <h3>Özellikler</h3>
+    <h3>En Çok Satanlar</h3>
     <div class="grid">
-      <app-card title="Hızlı Kurulum" [features]="['1 dk kurulum', 'Otomatik güncelleme']"></app-card>
-      <app-card title="Güvenli" [features]="['2FA', 'Şifreleme']"></app-card>
-      <app-card title="Ölçeklenebilir" [features]="['Bulut yerel', 'CDN']"></app-card>
-    </div>
-  </div>
-</section>
-
-<section id="pricing" class="pricing" role="region" aria-label="Fiyatlar">
-  <div class="container">
-    <h3>Fiyatlar</h3>
-    <div class="grid">
-      <app-card title="Başlangıç" price="₺0" [features]="['Temel özellikler']" ctaLabel="Başla"></app-card>
-      <app-card title="Pro" price="₺199/ay" [features]="['Tüm özellikler','Öncelikli destek']" ctaLabel="Satın Al" [highlight]="true"></app-card>
-      <app-card title="Kurumsal" price="İletişime geçin" [features]="['Özel SLA','SSO']" ctaLabel="Görüşelim"></app-card>
+      <app-card *ngFor="let b of bestSellers" [title]="b.name" [price]="b.price" ctaLabel="Satın Al" [highlight]="true"></app-card>
     </div>
   </div>
 </section>
@@ -69,7 +94,7 @@
     <form (submit)="onSubmit($event)" novalidate>
       <app-input id="name" name="name" label="Ad Soyad" placeholder="Adınız" [required]="true" [(ngModel)]="form.name"></app-input>
       <app-input id="email" name="email" type="email" label="E-posta" placeholder="ornek@mail.com" [required]="true" [invalid]="emailInvalid" [(ngModel)]="form.email" ariaDescribedBy="emailHelp"></app-input>
-      <small id="emailHelp" class="input__hint" *ngIf="emailInvalid">Lütfen geçerli bir e‑posta girin.</small>
+      @if (emailInvalid) { <small id="emailHelp" class="input__hint">Lütfen geçerli bir e‑posta girin.</small> }
       <div style="margin-top:12px">
         <app-button variant="primary" type="submit">Gönder</app-button>
       </div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { Button } from '../../components/button/button';
 import { Card } from '../../components/card/card';
 import { Accordion } from '../../components/accordion/accordion';
@@ -10,7 +10,7 @@ import { Modal } from '../../components/modal/modal';
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [FormsModule, NgIf, Button, Card, Accordion, AppInput, Modal],
+  imports: [CommonModule, FormsModule, NgIf, NgFor, Button, Card, Accordion, AppInput, Modal],
   templateUrl: './landing.html',
   styleUrl: './landing.scss'
 })
@@ -24,18 +24,38 @@ export class Landing {
   form = { name: '', email: '' };
   emailInvalid = false;
   openModal = false;
-  sidebarOpen = false;
+  isLightTheme = false;
+
+  products = [
+    { id: 'p1', name: 'Parfüm 01', price: '₺349' },
+    { id: 'p2', name: 'Parfüm 02', price: '₺399' },
+    { id: 'p3', name: 'Parfüm 03', price: '₺449' },
+    { id: 'p4', name: 'Parfüm 04', price: '₺499' },
+    { id: 'p5', name: 'Parfüm 05', price: '₺549' },
+    { id: 'p6', name: 'Parfüm 06', price: '₺599' },
+  ];
+
+  bestSellers = [
+    { id: 'b1', name: 'En Çok Satan 01', price: '₺499' },
+    { id: 'b2', name: 'En Çok Satan 02', price: '₺549' },
+    { id: 'b3', name: 'En Çok Satan 03', price: '₺599' },
+  ];
 
   toggleTheme() {
     const root = document.documentElement;
     const isLight = root.getAttribute('data-theme') === 'light';
-    root.setAttribute('data-theme', isLight ? 'dark' : 'light');
-    localStorage.setItem('theme', isLight ? 'dark' : 'light');
+    const next = isLight ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    this.isLightTheme = next === 'light';
   }
 
   ngOnInit() {
     const saved = localStorage.getItem('theme');
-    if (saved) document.documentElement.setAttribute('data-theme', saved);
+    if (saved) {
+      document.documentElement.setAttribute('data-theme', saved);
+      this.isLightTheme = saved === 'light';
+    }
   }
 
   onSubmit(event: Event) {
@@ -52,6 +72,5 @@ export class Landing {
     if (!el) return;
     const y = el.getBoundingClientRect().top + window.scrollY - 64; // account header height
     window.scrollTo({ top: y, behavior: 'smooth' });
-    this.sidebarOpen = false;
   }
 }
