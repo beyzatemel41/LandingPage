@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule, NgIf, NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Button } from '../../components/button/button';
-import { Card } from '../../components/card/card';
 import { Accordion } from '../../components/accordion/accordion';
+import { Card } from '../../components/card/card';
 import { AppInput } from '../../components/input/input';
 import { Modal } from '../../components/modal/modal';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgIf, NgFor, Button, Card, Accordion, AppInput, Modal],
+  imports: [CommonModule, FormsModule, NgFor, Button, Accordion, AppInput, Modal, Card],
   templateUrl: './landing.html',
   styleUrl: './landing.scss'
 })
@@ -27,13 +27,19 @@ export class Landing {
   isLightTheme = false;
 
   products = [
-    { id: 'p1', name: 'Parfüm 01', price: '₺349' },
-    { id: 'p2', name: 'Parfüm 02', price: '₺399' },
-    { id: 'p3', name: 'Parfüm 03', price: '₺449' },
-    { id: 'p4', name: 'Parfüm 04', price: '₺499' },
-    { id: 'p5', name: 'Parfüm 05', price: '₺549' },
-    { id: 'p6', name: 'Parfüm 06', price: '₺599' },
+    { id: 'p1', name: 'Amber Noir', price: '₺349' },
+    { id: 'p2', name: 'Citrus Bloom', price: '₺399' },
+    { id: 'p3', name: 'Saffron Oud', price: '₺449' },
+    { id: 'p4', name: 'Velvet Rose', price: '₺499' },
+    { id: 'p5', name: 'Marine Breeze', price: '₺549' },
+    { id: 'p6', name: 'Musk Essence', price: '₺599' },
   ];
+
+  get filteredProducts() {
+    const q = (this.form.search || '').toLowerCase().trim();
+    if (!q) return this.products;
+    return this.products.filter(p => p.name.toLowerCase().includes(q));
+  }
 
   bestSellers = [
     { id: 'b1', name: 'En Çok Satan 01', price: '₺499' },

@@ -6,11 +6,14 @@
   <img src="/Logo.ico" alt="Logo">
 </h1>    
     <nav class="nav" aria-label="Ana menü">
-      <app-button variant="ghost" size="sm" (pressed)="scrollTo('hero')">Anasayfa</app-button>
-      <app-button variant="ghost" size="sm" (pressed)="scrollTo('products')">Ürünler</app-button>
-      <app-button variant="ghost" size="sm" (pressed)="scrollTo('bestsellers')">En Çok Satanlar</app-button>
-      <app-button variant="ghost" size="sm" (pressed)="scrollTo('faq')">SSS</app-button>
-      <app-button variant="ghost" size="sm" (pressed)="scrollTo('contact')">İletişim</app-button>
+      <div class="nav__row nav__row--top">
+        <app-button variant="ghost" size="sm" (pressed)="scrollTo('hero')">Anasayfa</app-button>
+        <app-button variant="ghost" size="sm" (pressed)="scrollTo('bestsellers')">En Çok Satanlar</app-button>
+      </div>
+      <div class="nav__row nav__row--bottom">
+        <app-button variant="ghost" size="sm" (pressed)="scrollTo('faq')">SSS</app-button>
+        <app-button variant="ghost" size="sm" (pressed)="scrollTo('contact')">İletişim</app-button>
+      </div>
     </nav>
     <div class="header__right">
       <button
@@ -36,8 +39,9 @@
 <section id="hero" class="hero" role="region" aria-label="Hero">
   <div class="marquee-wrapper">
   <div class="marquee">
-    <span>ŞİMDİ AL SONRA ÖDE</span>
-    <span>ŞİMDİ AL SONRA ÖDE</span>
+    <span>500₺ üzeri alışverişlerde kargo bedava!</span>
+    <span>500₺ üzeri alışverişlerde kargo bedava!</span>
+
 
   </div>
 </div>
@@ -45,8 +49,7 @@
   <div class="container">
     <article class="hero-card" aria-labelledby="hero-title">
       <div class="hero-card__media" aria-hidden="true">
-        <div class="hero-card__badge">Yeni</div>
-        <div class="hero-card__bottle"></div>
+        <div class="hero-card__bottle"><img src="parfume2.jpg"></div>
       </div>
       <div class="hero-card__content">
         <h2 id="hero-title" class="hero-card__title">Niche Saffron Ambre</h2>
@@ -70,27 +73,12 @@
   </div>
   
 </section>
-
-
-<section id="products" class="products" role="region" aria-label="Ürünler">
-  <div class="container">
-    <h3>Ürünler</h3>
-    <div class="products-scroller" aria-label="Ürün listesi">
-      <article class="product-card" *ngFor="let p of products">
-        <div class="product-card__image" role="img" [attr.aria-label]="p.name"></div>
-        <div class="product-card__body">
-          <h4 class="product-card__title">{{ p.name }}</h4>
-          <p class="product-card__price">{{ p.price }}</p>
-          <app-button variant="primary" size="sm">Sepete Ekle</app-button>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
+<br>
+<br>
+<br>
 <section id="categories" class="categories" role="region" aria-label="Kategoriler">
   <div class="container">
-    <h3>Kategoriler</h3>
+    <h3 class="section-title">Kategoriler</h3>
     <div class="category-grid">
       <a class="category-card category-card--women" href="#" aria-label="Kadın Parfümleri">
         <div class="category-card__overlay"></div>
@@ -104,6 +92,37 @@
   </div>
 </section>
 
+<section id="products" class="products" role="region" aria-label="Ürünler">
+  <div class="container">
+    <h3 class="section-title">Ürünler</h3>
+    <div class="products-scroller" aria-label="Ürün listesi">
+      <article class="product-card" *ngFor="let p of filteredProducts">
+        <div class="product-card__image" role="img" [attr.aria-label]="p.name"></div>
+        <div class="product-card__body">
+          <h4 class="product-card__title">{{ p.name }}</h4>
+          <p class="product-card__price">{{ p.price }}</p>
+          <app-button variant="primary" size="sm">Sepete Ekle</app-button>
+        </div>
+      </article>
+    </div>
+   <br>
+   <br>
+   <br>
+
+        <div class="products-scroller" aria-label="Ürün listesi">
+      <article class="product-card" *ngFor="let p of filteredProducts">
+        <div class="product-card__image" role="img" [attr.aria-label]="p.name"></div>
+        <div class="product-card__body">
+          <h4 class="product-card__title">{{ p.name }}</h4>
+          <p class="product-card__price">{{ p.price }}</p>
+          <app-button variant="primary" size="sm">Sepete Ekle</app-button>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
 <section id="faq" class="faq" role="region" aria-label="SSS">
   <div class="container">
     <h3>SSS</h3>
@@ -113,8 +132,7 @@
 
 <section id="contact" class="cta-form" role="region" aria-label="İletişim formu">
   <div class="container">
-    <h3>Bize Ulaşın</h3>
-    <form (submit)="onSubmit($event)" novalidate>
+      <form (submit)="onSubmit($event)" novalidate>
       <app-input id="name" name="name" label="Ad Soyad" placeholder="Adınız" [required]="true" [(ngModel)]="form.name"></app-input>
       <app-input id="email" name="email" type="email" label="E-posta" placeholder="ornek@mail.com" [required]="true" [invalid]="emailInvalid" [(ngModel)]="form.email" ariaDescribedBy="emailHelp"></app-input>
       @if (emailInvalid) { <small id="emailHelp" class="input__hint">Lütfen geçerli bir e‑posta girin.</small> }

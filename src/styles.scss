@@ -286,6 +286,22 @@ section {
   gap: var(--space-6);
 }
 
+/* Global scrollbar theming */
+* {
+  scrollbar-color: rgba(180,180,190,.6) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(180,180,190,.8), rgba(140,140,150,.8));
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, rgba(190,190,200,.9), rgba(150,150,160,.9)); }
+
 @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 960px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 
