@@ -17,7 +17,11 @@ export class App implements OnInit {
   protected currentTheme: 'light' | 'dark' = 'dark';
   protected showGlobalHeader = true;
   
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    // Set initial header state immediately to prevent flash
+    const currentUrl = this.router.url;
+    this.showGlobalHeader = currentUrl !== '/' && currentUrl !== '';
+  }
 
   ngOnInit(): void {
     const stored = localStorage.getItem('theme');
@@ -36,6 +40,7 @@ export class App implements OnInit {
         this.showGlobalHeader = url !== '/' && url !== '';
       }
     });
+
   }
 
   protected toggleTheme(): void {
