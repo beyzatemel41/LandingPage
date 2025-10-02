@@ -15,4 +15,6 @@ export class Card {
   @Input() features: string[] = [];
   @Input() ctaLabel?: string;
   @Input() highlight = false;
+  @Input() image?: string; // Ürün resmi için
+  @Input() explanation?: string;
 }

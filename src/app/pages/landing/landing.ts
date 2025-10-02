@@ -26,14 +26,15 @@ export class Landing {
   openModal = false;
   isLightTheme = false;
 
-  products = [
-    { id: 'p1', name: 'Amber Noir', price: '₺349' },
-    { id: 'p2', name: 'Citrus Bloom', price: '₺399' },
-    { id: 'p3', name: 'Saffron Oud', price: '₺449' },
-    { id: 'p4', name: 'Velvet Rose', price: '₺499' },
-    { id: 'p5', name: 'Marine Breeze', price: '₺549' },
-    { id: 'p6', name: 'Musk Essence', price: '₺599' },
-  ];
+products = [
+  { id: 'p1', name: 'Amber Noir', price: '₺349', image: '/P1.jpg' },
+  { id: 'p2', name: 'Aventus', price: '₺399', image: '/P2.jpg' },
+  { id: 'p3', name: 'Bleu De Chanel', price: '₺299', image: '/P3.jpg' },
+  { id: 'p4', name: 'Dior Sauvage', price: '₺379', image: '/P4.jpg' },
+  { id: 'p5', name: 'Fahrenheit', price: '₺259', image: '/P5.jpg' },
+  { id: 'p6', name: 'Hugo Boss Bottled', price: '₺199', image: '/P6.jpg' }
+];
+
 
   get filteredProducts() {
     const q = (this.form.search || '').toLowerCase().trim();

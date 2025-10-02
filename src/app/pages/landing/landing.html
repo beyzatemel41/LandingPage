@@ -8,6 +8,7 @@
     <nav class="nav" aria-label="Ana menü">
       <div class="nav__row nav__row--top">
         <app-button variant="ghost" size="sm" (pressed)="scrollTo('hero')">Anasayfa</app-button>
+        <app-button variant="ghost" size="sm" (pressed)="scrollTo('products')">Ürünler</app-button>
         <app-button variant="ghost" size="sm" (pressed)="scrollTo('bestsellers')">En Çok Satanlar</app-button>
       </div>
       <div class="nav__row nav__row--bottom">
@@ -97,31 +98,43 @@
     <h3 class="section-title">Ürünler</h3>
     <div class="products-scroller" aria-label="Ürün listesi">
       <article class="product-card" *ngFor="let p of filteredProducts">
-        <div class="product-card__image" role="img" [attr.aria-label]="p.name"></div>
+        
+        <!-- Ürün resmi -->
+        <img [src]="p.image" [alt]="p.name" class="product-card__image" />
+
+        <!-- Ürün bilgileri -->
         <div class="product-card__body">
           <h4 class="product-card__title">{{ p.name }}</h4>
           <p class="product-card__price">{{ p.price }}</p>
           <app-button variant="primary" size="sm">Sepete Ekle</app-button>
         </div>
+
       </article>
     </div>
-   <br>
-   <br>
-   <br>
-
-        <div class="products-scroller" aria-label="Ürün listesi">
-      <article class="product-card" *ngFor="let p of filteredProducts">
-        <div class="product-card__image" role="img" [attr.aria-label]="p.name"></div>
-        <div class="product-card__body">
-          <h4 class="product-card__title">{{ p.name }}</h4>
-          <p class="product-card__price">{{ p.price }}</p>
-          <app-button variant="primary" size="sm">Sepete Ekle</app-button>
-        </div>
-      </article>
-    </div>
-
   </div>
 </section>
+
+   <br>
+   <br>
+   <br>
+<section id="products" class="products" role="region" aria-label="Ürünler">
+  <div class="container">
+    <h3 class="section-title">Ürünler</h3>
+
+    <div class="products-grid">
+      <app-card 
+        *ngFor="let p of products"
+        [title]="p.name"
+        [price]="p.price"
+        [image]="p.image"
+        [ctaLabel]="'Sepete Ekle'">
+      </app-card>
+    </div>
+  </div>
+</section>
+
+
+
 
 <section id="faq" class="faq" role="region" aria-label="SSS">
   <div class="container">
