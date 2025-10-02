@@ -34,9 +34,6 @@
   </div>
   
 </header>
-
-
-
 <section id="hero" class="hero" role="region" aria-label="Hero">
   <div class="marquee-wrapper">
   <div class="marquee">
@@ -73,6 +70,8 @@
     </article>
   </div>
   
+   
+  
 </section>
 <br>
 <br>
@@ -93,37 +92,87 @@
   </div>
 </section>
 
-<section id="products" class="products" role="region" aria-label="Ürünler">
+
+
+<!-- En Çok Satanlar Bölümü -->
+<section id="bestsellers" class="bestsellers" role="region" aria-label="En Çok Satanlar">
   <div class="container">
-    <h3 class="section-title">Ürünler</h3>
-    <div class="products-scroller" aria-label="Ürün listesi">
-      <article class="product-card" *ngFor="let p of filteredProducts">
-        
-        <!-- Ürün resmi -->
-        <img [src]="p.image" [alt]="p.name" class="product-card__image" />
-
-        <!-- Ürün bilgileri -->
-        <div class="product-card__body">
-          <h4 class="product-card__title">{{ p.name }}</h4>
-          <p class="product-card__price">{{ p.price }}</p>
-          <app-button variant="primary" size="sm">Sepete Ekle</app-button>
+    <h3 class="section-title">En Çok Satanlar</h3>
+ 
+    <div class="carousel-wrapper"
+         role="region" 
+         aria-label="En çok satan ürünler carousel"
+         (mouseenter)="pauseCarousel()" 
+         (mouseleave)="resumeCarousel()"
+         (keydown)="onCarouselKeydown($event)"
+         tabindex="0">      
+         <button 
+        class="carousel-btn carousel-btn--prev" 
+        type="button"
+        aria-label="Önceki ürünleri göster"
+        (click)="prevSlide()"
+        [disabled]="currentSlide === 0">
+        ‹
+      </button>
+      
+      <button 
+        class="carousel-btn carousel-btn--next" 
+        type="button"
+        aria-label="Sonraki ürünleri göster"
+        (click)="nextSlide()"
+        [disabled]="currentSlide >= maxSlide">
+        ›
+      </button>
+      
+      <div class="carousel-track" 
+           #carouselTrack
+           [style.transform]="'translateX(' + (-currentSlide * slideWidth) + '%)'">
+        <div class="carousel-slide" *ngFor="let b of bestSellers; let i = index">
+          <app-card 
+            [title]="b.name"
+            [price]="b.price"
+            [image]="b.image"
+            [highlight]="true"
+            [ctaLabel]="'Hemen Al'">
+          </app-card>
         </div>
-
-      </article>
+      </div>
+      
+      <div class="carousel-dots" role="tablist" aria-label="Carousel sayfa göstergeleri">
+        <button 
+          *ngFor="let dot of dots; let i = index"
+          class="carousel-dot"
+          [class.carousel-dot--active]="i === currentSlide"
+          type="button"
+          role="tab"
+          [attr.aria-selected]="i === currentSlide ? 'true' : 'false'"
+          [attr.aria-label]="'Sayfa ' + (i + 1) + ' göster'"
+          (click)="goToSlide(i)">
+        </button>
+      </div>
     </div>
   </div>
 </section>
 
-   <br>
-   <br>
-   <br>
+
 <section id="products" class="products" role="region" aria-label="Ürünler">
   <div class="container">
     <h3 class="section-title">Ürünler</h3>
+    
+    <div class="search-container">
+      <app-input 
+        id="search" 
+        name="search" 
+        type="search"
+        label="Ürün Ara" 
+        placeholder="Parfüm adı yazın..." 
+        [(ngModel)]="form.search">
+      </app-input>
+    </div>
 
     <div class="products-grid">
       <app-card 
-        *ngFor="let p of products"
+        *ngFor="let p of filteredProducts"
         [title]="p.name"
         [price]="p.price"
         [image]="p.image"
@@ -133,18 +182,16 @@
   </div>
 </section>
 
-
-
-
 <section id="faq" class="faq" role="region" aria-label="SSS">
   <div class="container">
-    <h3>SSS</h3>
+    <h3>Sık Sorulan Sorular</h3>
     <app-accordion [items]="faqItems"></app-accordion>
   </div>
 </section>
 
 <section id="contact" class="cta-form" role="region" aria-label="İletişim formu">
   <div class="container">
+    <h2>İstek Ve Önerileriniz için</h2>
       <form (submit)="onSubmit($event)" novalidate>
       <app-input id="name" name="name" label="Ad Soyad" placeholder="Adınız" [required]="true" [(ngModel)]="form.name"></app-input>
       <app-input id="email" name="email" type="email" label="E-posta" placeholder="ornek@mail.com" [required]="true" [invalid]="emailInvalid" [(ngModel)]="form.email" ariaDescribedBy="emailHelp"></app-input>

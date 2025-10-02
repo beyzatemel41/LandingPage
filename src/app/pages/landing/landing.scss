@@ -90,23 +90,67 @@
   }
   .theme-toggle[aria-checked="true"] .theme-toggle__icon { left: 28px; background: #fff; color: #111; }
 
-  /* Responsive breakpoints */
-  @media (max-width: 640px) {
-    .header__grid { grid-template-columns: auto auto; row-gap: 8px; column-gap: 8px; }
-    .header .nav { grid-column: 1 / -1; grid-template-rows: auto auto; }
-    .hero { background-attachment: scroll; padding-top: 96px; }
-  }
+   /* Responsive breakpoints */
+   @media (max-width: 640px) {
+     .header__grid { 
+       grid-template-columns: auto auto; 
+       row-gap: 8px; 
+       column-gap: 8px; 
+     }
+     
+     .header .nav { 
+       grid-column: 1 / -1; 
+       grid-template-rows: auto auto;
+       gap: 6px;
+     }
+     
+     .header .nav .nav__row--bottom {
+       display: flex;
+       gap: 12px;
+       justify-content: center;
+       margin-top: 4px;
+     }
+     
+     .hero { 
+       background-attachment: scroll; 
+       padding-top: 96px; 
+     }
+   }
 
   @media (min-width: 641px) and (max-width: 1024px) {
-    .header .nav { display: flex; gap: 12px; padding: 6px 10px; border-radius: 999px; }
-    .header .nav .nav__row { display: contents; }
-    .hero { text-align: left; }
+    .header .nav { 
+      display: flex; 
+      gap: 8px; 
+      padding: 6px 10px; 
+      border-radius: 999px; 
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .header .nav .nav__row { 
+      display: contents; 
+    }
+    
+    .hero { 
+      text-align: left; 
+    }
   }
 
   @media (min-width: 1025px) {
-    .header .nav { display: flex; gap: 12px; padding: 6px 12px; border-radius: 999px; }
-    .header .nav .nav__row { display: contents; }
-    .hero { padding-block: calc(var(--space-20) + 20px); }
+    .header .nav { 
+      display: flex; 
+      gap: 8px; 
+      padding: 6px 12px; 
+      border-radius: 999px; 
+    }
+    
+    .header .nav .nav__row { 
+      display: contents; 
+    }
+    
+    .hero { 
+      padding-block: calc(var(--space-20) + 20px); 
+    }
   }
 
   .hero__cta-row { display: flex; gap: 10px; justify-content: center; margin-top: 12px; }
@@ -163,9 +207,16 @@
     mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   }
+// Arama kutusu stilleri
+.search-container {
+  max-width: 400px;
+  margin: 0 auto var(--space-8);
+}
+
+// Ürünler grid
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
 
   @media (max-width: 768px) {
@@ -174,6 +225,155 @@
 
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
+  }
+}
+
+// En çok satanlar bölümü
+.bestsellers {
+  padding: var(--space-20) 0;
+  background: linear-gradient(180deg, 
+    color-mix(in oklab, var(--color-primary) 3%, transparent), 
+    transparent
+  );
+}
+
+
+
+// Carousel Styles
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-elevated);
+  border: 1px solid color-mix(in oklab, var(--color-text) 8%, transparent);
+  box-shadow: var(--shadow-lg);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  padding: var(--space-6);
+  
+  // Responsive breakpoints
+  @media (min-width: 641px) and (max-width: 1024px) {
+    flex: 0 0 50%; 
+  }
+  
+  @media (min-width: 1025px) {
+
+    flex: 0 0 30%;
+  }
+}
+
+// Navigation buttons
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-elevated);
+  color: var(--color-text);
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  border: 1px solid color-mix(in oklab, var(--color-text) 12%, transparent);
+  
+  &:hover:not(:disabled) {
+    background: var(--color-primary);
+    color: rgba(255, 255, 255, 0.217);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  &--prev {
+    left: 16px;
+  }
+  
+  &--next {
+    right: 16px;
+  }
+  
+  // Mobile adjustments
+  @media (max-width: 640px) {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    
+    &--prev {
+      left: 8px;
+    }
+    
+    &--next {
+      right: 8px;
+    }
+  }
+}
+
+// Dots indicator
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: var(--space-4) 0;
+  background: color-mix(in oklab, var(--color-elevated) 50%, transparent);
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--color-text) 30%, transparent);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: color-mix(in oklab, var(--color-text) 50%, transparent);
+    transform: scale(1.2);
+  }
+  
+  &--active {
+    background: var(--color-primary);
+    transform: scale(1.3);
+  }
+}
+
+// Touch/swipe support (basic)
+.carousel-track {
+  touch-action: pan-y;
+}
+
+// Keyboard focus styles
+.carousel-btn:focus-visible,
+.carousel-dot:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    transition: none;
+  }
+  
+  .carousel-btn {
+    transition: none;
   }
 }
 
@@ -292,30 +492,10 @@
     .hero-card { grid-template-columns: 1.1fr 1fr; text-align: left; }
   }
 
-  /* Product scroller */
-  .products-scroller {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: clamp(220px, 40vw, 300px);
-    gap: 16px;
-    overflow-x: auto;
-    padding-bottom: 8px;
-    scroll-snap-type: x mandatory;
+  /* Products section spacing */
+  .products {
+    padding: var(--space-20) 0;
   }
-  .products-scroller::-webkit-scrollbar { height: 10px; }
-  .products-scroller::-webkit-scrollbar-thumb { background: color-mix(in oklab, var(--color-text) 14%, transparent); border-radius: 8px; }
-
-  .product-card { scroll-snap-align: start; background: var(--color-elevated); border: 1px solid rgba(255,255,255,.06); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden; display: grid; }
-.product-card__image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover; // resmin kırpılmadan düzgün görünmesi için
-  border-radius: 8px;
-  margin-bottom: 12px;
-}
-  .product-card__body { padding: 12px; display: grid; gap: 8px; }
-  .product-card__title { margin: 0; font-size: 16px; }
-  .product-card__price { margin: 0; font-weight: 700; }
 
 .footer {
   background: var(--color-elevated);
