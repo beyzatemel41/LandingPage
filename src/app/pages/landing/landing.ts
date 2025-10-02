@@ -28,21 +28,21 @@ export class Landing implements OnInit, OnDestroy {
   isLightTheme = false;
 
 products = [
-  { id: 'p1', name: 'Amber Noir', price: '₺349', image: './P1.jpg' },
-  { id: 'p2', name: 'Aventus', price: '₺399', image: './P2.jpg' },
-  { id: 'p3', name: 'Bleu De Chanel', price: '₺299', image: './P3.jpg' },
-  { id: 'p4', name: 'Dior Sauvage', price: '₺379', image: './P4.jpg' },
-  { id: 'p5', name: 'Fahrenheit', price: '₺259', image: './P5.jpg' },
-  { id: 'p6', name: 'Hugo Boss Bottled', price: '₺199', image: './P6.jpg' },
-  { id: 'p7', name: 'Irıs Toraffe', price: '₺309', image: './P7.jpg' },
-  { id: 'p8', name: 'Angelıque Nore', price: '₺455', image: './P8.jpg' },
-  { id: 'p9', name: 'Amore Love', price: '₺199', image: './P9.jpg' },
-  { id: 'p10', name: 'CK One', price: '₺1099', image: './P10.jpg' },
-  { id: 'p11', name: 'Amore Selfish', price: '₺299', image: './P11.jpg' },
-  { id: 'p12', name: 'Amore True', price: '₺149', image: './P12.jpg' },
-  { id: 'p13', name: 'Gentleman Givenchy', price: '₺189', image: './P13.jpg' },
-  { id: 'p14', name: 'Amore Beyza', price: '₺199', image: './P14.jpg' },
-  { id: 'p15', name: 'Caıa Senso', price: '₺999', image: './P15.jpg' }
+  { id: 'p1', name: 'Amber Noir', price: '₺349', image: 'P1.jpg' },
+  { id: 'p2', name: 'Aventus', price: '₺399', image: 'P2.jpg' },
+  { id: 'p3', name: 'Bleu De Chanel', price: '₺299', image: 'P3.jpg' },
+  { id: 'p4', name: 'Dior Sauvage', price: '₺379', image: 'P4.jpg' },
+  { id: 'p5', name: 'Fahrenheit', price: '₺259', image: 'P5.jpg' },
+  { id: 'p6', name: 'Hugo Boss Bottled', price: '₺199', image: 'P6.jpg' },
+  { id: 'p7', name: 'Irıs Toraffe', price: '₺309', image: 'P7.jpg' },
+  { id: 'p8', name: 'Angelıque Nore', price: '₺455', image: 'P8.jpg' },
+  { id: 'p9', name: 'Amore Love', price: '₺199', image: 'P9.jpg' },
+  { id: 'p10', name: 'CK One', price: '₺1099', image: 'P10.jpg' },
+  { id: 'p11', name: 'Amore Selfish', price: '₺299', image: 'P11.jpg' },
+  { id: 'p12', name: 'Amore True', price: '₺149', image: 'P12.jpg' },
+  { id: 'p13', name: 'Gentleman Givenchy', price: '₺189', image: 'P13.jpg' },
+  { id: 'p14', name: 'Amore Beyza', price: '₺199', image: 'P14.jpg' },
+  { id: 'p15', name: 'Caıa Senso', price: '₺999', image: 'P15.jpg' }
 ];
 
 
@@ -53,14 +53,14 @@ products = [
   }
 
   bestSellers = [
-    { id: 'b1', name: 'Tom Ford Black Orchid', price: '₺499', image: './P7.jpg' },
-    { id: 'b2', name: 'Creed Aventus', price: '₺549', image: './P8.jpg' },
-    { id: 'b3', name: 'Maison Margiela REPLICA', price: '₺599', image: './parfume1.jpg' },
-    { id: 'b4', name: 'Chanel No. 5', price: '₺649', image: './parfume2.jpg' },
-    { id: 'b5', name: 'Dior J\'adore', price: '₺579', image: './P1.jpg' },
-    { id: 'p12', name: 'Amore True', price: '₺149', image: './P12.jpg' },
-    { id: 'p13', name: 'Gentleman Givenchy', price: '₺189', image: './P13.jpg' },
-    { id: 'p15', name: 'Caıa Senso', price: '₺999', image: './P15.jpg' }
+    { id: 'b1', name: 'Tom Ford Black Orchid', price: '₺499', image: 'P7.jpg' },
+    { id: 'b2', name: 'Creed Aventus', price: '₺549', image: 'P8.jpg' },
+    { id: 'b3', name: 'Maison Margiela REPLICA', price: '₺599', image: 'parfume1.jpg' },
+    { id: 'b4', name: 'Chanel No. 5', price: '₺649', image: 'parfume2.jpg' },
+    { id: 'b5', name: 'Dior J\'adore', price: '₺579', image: 'P1.jpg' },
+    { id: 'p12', name: 'Amore True', price: '₺149', image: 'P12.jpg' },
+    { id: 'p13', name: 'Gentleman Givenchy', price: '₺189', image: 'P13.jpg' },
+    { id: 'p15', name: 'Caıa Senso', price: '₺999', image: 'P15.jpg' }
   ];
 
   // Carousel properties
