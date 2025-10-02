@@ -1,5 +1,37 @@
 # LandingPage
 
+Modern parfüm e-ticaret landing page'i. Angular 20 ile geliştirilmiş, Vercel'e deploy edilmeye hazır.
+
+## 🚀 Vercel'e Deploy Etme
+
+Bu proje Vercel'e deploy edilmeye hazır durumda. Deploy etmek için:
+
+1. **Vercel CLI ile:**
+   ```bash
+   npm i -g vercel
+   vercel
+   ```
+
+2. **Vercel Dashboard ile:**
+   - GitHub repository'nizi Vercel'e bağlayın
+   - Build Command: `npm run vercel-build`
+   - Output Directory: `dist/LandingPage/browser`
+   - Framework Preset: `Angular`
+
+3. **Otomatik Deploy:**
+   - Her push'ta otomatik deploy aktif
+   - Production build optimize edilmiş
+   - Static asset'ler doğru yollarla yapılandırılmış
+
+## 📁 Proje Yapısı
+
+- `src/app/pages/landing/` - Ana landing page
+- `src/app/components/` - Yeniden kullanılabilir component'ler
+- `public/` - Static asset'ler (resimler, iconlar)
+- `vercel.json` - Vercel yapılandırması
+
+## 🛠️ Geliştirme
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.5.
 
 ## Development server

@@ -36,6 +36,10 @@ export class App implements OnInit {
         this.showGlobalHeader = url !== '/' && url !== '';
       }
     });
+
+    // Set initial state based on current URL
+    const currentUrl = this.router.url;
+    this.showGlobalHeader = currentUrl !== '/' && currentUrl !== '';
   }
 
   protected toggleTheme(): void {
