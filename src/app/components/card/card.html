@@ -1,0 +1,17 @@
+<article class="card" [class.card--highlight]="highlight" tabindex="0">
+  <img *ngIf="image" [src]="image" [alt]="title" class="card__image" />
+
+  <header class="card__header">
+    <h3 class="card__title">{{ title }}</h3>
+<h4 class="card__explanation" [attr.aria-label]="explanation">{{ explanation }}</h4>
+    <p class="card__price" *ngIf="price" aria-label="Fiyat">{{ price }}</p>
+  </header>
+
+  <ul class="card__features" *ngIf="features?.length">
+    <li class="card__feature" *ngFor="let f of features">{{ f }}</li>
+  </ul>
+
+  <footer class="card__footer" *ngIf="ctaLabel">
+    <app-button variant="primary" size="lg">{{ ctaLabel }}</app-button>
+  </footer>
+</article>

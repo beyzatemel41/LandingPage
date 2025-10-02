@@ -1,0 +1,38 @@
+<header class="header" *ngIf="showGlobalHeader">
+  <div class="container header__inner">
+    <a class="brand" routerLink="/">
+      <img src="/LogoK.ico" alt="Logo" class="brand__logo" />
+      <span class="brand__name">LandingPage</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a routerLink="/" routerLinkActive="active" aria-current="page">Ana Sayfa</a>
+      <a routerLink="/about" routerLinkActive="active">Hakkında</a>
+      <a routerLink="/contact" routerLinkActive="active">İletişim</a>
+    </nav>
+
+    <form class="search" role="search" (submit)="onSearch($event)">
+      <input
+        type="search"
+        class="search__input"
+        placeholder="Ara..."
+        [(ngModel)]="searchQuery"
+        name="q"
+        aria-label="Sitede ara"
+      />
+      <button type="submit" class="btn btn--primary search__btn" aria-label="Ara">
+        🔎
+      </button>
+    </form>
+
+    <button type="button" class="btn btn--ghost theme-toggle" (click)="toggleTheme()" [attr.aria-label]="currentTheme === 'light' ? 'Koyu moda geç' : 'Açık moda geç'">
+      <span *ngIf="currentTheme === 'light'">🌙</span>
+      <span *ngIf="currentTheme === 'dark'">☀️</span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+
+</main>

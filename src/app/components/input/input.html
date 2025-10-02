@@ -1,0 +1,18 @@
+<label class="input" [attr.for]="id ? id : null">
+  <span class="input__label" *ngIf="label">{{ label }}<span class="input__req" *ngIf="required" aria-hidden="true">*</span></span>
+  <input
+    class="input__control"
+    [attr.id]="id ? id : null"
+    [attr.name]="name ? name : null"
+    [type]="type"
+    [placeholder]="placeholder"
+    [required]="required"
+    [disabled]="disabled"
+    [attr.aria-invalid]="invalid ? 'true' : undefined"
+    [attr.aria-describedby]="ariaDescribedBy || undefined"
+    [ngModel]="value"
+    (ngModelChange)="handleInput($event)"
+    (blur)="handleBlur()"
+  />
+  <ng-content select=".input__hint"></ng-content>
+</label>

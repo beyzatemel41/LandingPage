@@ -1,0 +1,24 @@
+<div class="accordion" role="region" aria-label="Sıkça Sorulan Sorular">
+  <div class="accordion__item" *ngFor="let it of items">
+    <h4 class="accordion__heading">
+      <button
+        class="accordion__trigger"
+        [attr.aria-expanded]="isOpen(it.id) ? 'true' : 'false'"
+        [attr.aria-controls]="'sect-'+it.id"
+        [id]="'btn-'+it.id"
+        (click)="toggle(it.id)"
+      >
+        {{ it.question }}
+      </button>
+    </h4>
+    <div
+      class="accordion__panel"
+      [id]="'sect-'+it.id"
+      role="region"
+      [attr.aria-labelledby]="'btn-'+it.id"
+      [hidden]="!isOpen(it.id)"
+    >
+      <p>{{ it.answer }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+/* Button component styles extend global .btn tokenized primitive */
+
+:host { display: inline-block; }
+
+.btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.btn::after { /* subtle interactive sheen */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120px 60px at var(--x, 50%) var(--y, -20%), rgba(255,255,255,.18), transparent 60%);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+
+.btn:hover::after { opacity: .8; }
+
+.btn--outline {
+  background: transparent;
+  border-color: color-mix(in oklab, var(--color-text) 18%, transparent);
+}
+
+.btn--sm { height: 36px; padding-inline: 12px; font-size: 14px; }
+.btn--lg { height: 52px; padding-inline: 22px; font-size: 18px; }
+
+:host(.is-block) .btn { width: 100%; }
+
+.btn__spinner {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid color-mix(in oklab, var(--color-text) 30%, transparent);
+  border-top-color: white;
+  animation: spin .9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+

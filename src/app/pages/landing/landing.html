@@ -1,0 +1,219 @@
+<header class="header" role="banner">
+  
+  <div class="container header__grid">
+    
+<h1 class="logo">
+  <img src="/Logo.ico" alt="Logo">
+</h1>    
+    <nav class="nav" aria-label="Ana menü">
+      <div class="nav__row nav__row--top">
+        <app-button variant="ghost" size="sm" (pressed)="scrollTo('hero')">Anasayfa</app-button>
+        <app-button variant="ghost" size="sm" (pressed)="scrollTo('products')">Ürünler</app-button>
+        <app-button variant="ghost" size="sm" (pressed)="scrollTo('bestsellers')">En Çok Satanlar</app-button>
+      </div>
+      <div class="nav__row nav__row--bottom">
+        <app-button variant="ghost" size="sm" (pressed)="scrollTo('faq')">SSS</app-button>
+        <app-button variant="ghost" size="sm" (pressed)="scrollTo('contact')">İletişim</app-button>
+      </div>
+    </nav>
+    <div class="header__right">
+      <button
+        class="theme-toggle"
+        type="button"
+        role="switch"
+        [attr.aria-checked]="isLightTheme ? 'true' : 'false'"
+        aria-label="Tema değiştir"
+        (click)="toggleTheme()"
+      >
+      
+        <span class="theme-toggle__icon" aria-hidden="true">
+          @if (isLightTheme) { ☀️ } @else { 🌙 }
+        </span>
+      </button>
+    </div>
+  </div>
+  
+</header>
+<section id="hero" class="hero" role="region" aria-label="Hero">
+  <div class="marquee-wrapper">
+  <div class="marquee">
+    <span>500₺ üzeri alışverişlerde kargo bedava!</span>
+    <span>500₺ üzeri alışverişlerde kargo bedava!</span>
+
+
+  </div>
+</div>
+
+  <div class="container">
+    <article class="hero-card" aria-labelledby="hero-title">
+      <div class="hero-card__media" aria-hidden="true">
+        <div class="hero-card__bottle"><img src="parfume2.jpg"></div>
+      </div>
+      <div class="hero-card__content">
+        <h2 id="hero-title" class="hero-card__title">Niche Saffron Ambre</h2>
+        <p class="hero-card__subtitle">Sıradışı notalarla imza kokunuzu keşfedin. Safranın sıcaklığı, amberin zarafetiyle buluşuyor.</p>
+        <div class="hero-card__meta">
+          <span class="hero-card__price" aria-label="Başlangıç fiyatı">₺1.650</span>
+          <span class="hero-card__volume" aria-label="Şişe hacmi">70 ml</span>
+        </div>
+        <div class="hero-card__actions">
+          <app-button variant="primary" size="lg" (pressed)="openModal=true">Hemen İncele</app-button>
+          <app-button variant="outline" size="md" (pressed)="scrollTo('products')">Ürünlere Git</app-button>
+          <app-button variant="ghost" size="md" (pressed)="scrollTo('bestsellers')">En Çok Satanlar</app-button>
+        </div>
+        <ul class="hero-card__trust" aria-label="Güven göstergeleri">
+          <li>Orijinal Ürün</li>
+          <li>Hızlı Kargo</li>
+          <li>Kolay İade</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+  
+   
+  
+</section>
+<br>
+<br>
+<br>
+<section id="categories" class="categories" role="region" aria-label="Kategoriler">
+  <div class="container">
+    <h3 class="section-title">Kategoriler</h3>
+    <div class="category-grid">
+      <a class="category-card category-card--women" href="#" aria-label="Kadın Parfümleri">
+        <div class="category-card__overlay"></div>
+        <h4>Kadın Parfümleri</h4>
+      </a>
+      <a class="category-card category-card--men" href="#" aria-label="Erkek Parfümleri">
+        <div class="category-card__overlay"></div>
+        <h4>Erkek Parfümleri</h4>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- En Çok Satanlar Bölümü -->
+<section id="bestsellers" class="bestsellers" role="region" aria-label="En Çok Satanlar">
+  <div class="container">
+    <h3 class="section-title">En Çok Satanlar</h3>
+ 
+    <div class="carousel-wrapper"
+         role="region" 
+         aria-label="En çok satan ürünler carousel"
+         (mouseenter)="pauseCarousel()" 
+         (mouseleave)="resumeCarousel()"
+         (keydown)="onCarouselKeydown($event)"
+         tabindex="0">      
+         <button 
+        class="carousel-btn carousel-btn--prev" 
+        type="button"
+        aria-label="Önceki ürünleri göster"
+        (click)="prevSlide()"
+        [disabled]="currentSlide === 0">
+        ‹
+      </button>
+      
+      <button 
+        class="carousel-btn carousel-btn--next" 
+        type="button"
+        aria-label="Sonraki ürünleri göster"
+        (click)="nextSlide()"
+        [disabled]="currentSlide >= maxSlide">
+        ›
+      </button>
+      
+      <div class="carousel-track" 
+           #carouselTrack
+           [style.transform]="'translateX(' + (-currentSlide * slideWidth) + '%)'">
+        <div class="carousel-slide" *ngFor="let b of bestSellers; let i = index">
+          <app-card 
+            [title]="b.name"
+            [price]="b.price"
+            [image]="b.image"
+            [highlight]="true"
+            [ctaLabel]="'Hemen Al'">
+          </app-card>
+        </div>
+      </div>
+      
+      <div class="carousel-dots" role="tablist" aria-label="Carousel sayfa göstergeleri">
+        <button 
+          *ngFor="let dot of dots; let i = index"
+          class="carousel-dot"
+          [class.carousel-dot--active]="i === currentSlide"
+          type="button"
+          role="tab"
+          [attr.aria-selected]="i === currentSlide ? 'true' : 'false'"
+          [attr.aria-label]="'Sayfa ' + (i + 1) + ' göster'"
+          (click)="goToSlide(i)">
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="products" class="products" role="region" aria-label="Ürünler">
+  <div class="container">
+    <h3 class="section-title">Ürünler</h3>
+    
+    <div class="search-container">
+      <app-input 
+        id="search" 
+        name="search" 
+        type="search"
+        label="Ürün Ara" 
+        placeholder="Parfüm adı yazın..." 
+        [(ngModel)]="form.search">
+      </app-input>
+    </div>
+
+    <div class="products-grid">
+      <app-card 
+        *ngFor="let p of filteredProducts"
+        [title]="p.name"
+        [price]="p.price"
+        [image]="p.image"
+        [ctaLabel]="'Sepete Ekle'">
+      </app-card>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="faq" role="region" aria-label="SSS">
+  <div class="container">
+    <h3>Sık Sorulan Sorular</h3>
+    <app-accordion [items]="faqItems"></app-accordion>
+  </div>
+</section>
+
+<section id="contact" class="cta-form" role="region" aria-label="İletişim formu">
+  <div class="container">
+    <h2>İstek Ve Önerileriniz için</h2>
+      <form (submit)="onSubmit($event)" novalidate>
+      <app-input id="name" name="name" label="Ad Soyad" placeholder="Adınız" [required]="true" [(ngModel)]="form.name"></app-input>
+      <app-input id="email" name="email" type="email" label="E-posta" placeholder="ornek@mail.com" [required]="true" [invalid]="emailInvalid" [(ngModel)]="form.email" ariaDescribedBy="emailHelp"></app-input>
+      @if (emailInvalid) { <small id="emailHelp" class="input__hint">Lütfen geçerli bir e‑posta girin.</small> }
+      <div style="margin-top:12px">
+        <app-button variant="primary" type="submit">Gönder</app-button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>© 2025 Tüm Hakları Saklıdır | <a href="#">Gizlilik Politikası</a></p>
+  </div>
+</footer>
+
+<app-modal [open]="openModal" title="Hızlı Başlangıç" (closed)="openModal=false">
+  <p>Kurulum adımlarını izlemek için e‑posta bırakın veya dökümana göz atın.</p>
+  <div style="display:flex;gap:12px;margin-top:12px">
+    <app-button variant="primary" (pressed)="openModal=false">Tamam</app-button>
+    <app-button variant="ghost" (pressed)="openModal=false">Kapat</app-button>
+  </div>
+</app-modal>
+
