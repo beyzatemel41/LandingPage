@@ -47,7 +47,9 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "outputPath": "dist/LandingPage/browser",
+              "baseHref": "/"
             },
             "development": {
               "optimization": false,
