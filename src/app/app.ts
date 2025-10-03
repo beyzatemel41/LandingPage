@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, FormsModule, RouterLink, RouterLinkActive, NgIf],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  templateUrl: './pages/landing/landing.html',
+  styleUrl: './pages/landing/landing.scss'
 })
 export class App implements OnInit {
   protected title = 'LandingPage';
